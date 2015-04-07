@@ -1,0 +1,6 @@
+#ifndef __CONFIG_H__
+#define __CONFIG_H__
+
+#define GLOBAL_DATADIR "@datadir@"
+
+#endif /* __CONFIG_H__ */
