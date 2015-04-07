@@ -1,0 +1,14 @@
+#ifndef INFO_H_H
+#define INFO_H_H
+#include <msg.h>
+#include "qq_types.h"
+extern "C"
+{
+void translate_global_init();
+void translate_global_free();
+int translate_message_to_struct(LwqqClient* lc,const char* to,const char* what,LwqqMsg*,int using_cface);
+void translate_struct_to_message(qq_account* ac, LwqqMsgMessage* c,char* buf);
+const char* translate_smile(int face);
+char* translate_to_html_symbol(const char* s);
+}
+#endif

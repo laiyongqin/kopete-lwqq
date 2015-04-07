@@ -1,0 +1,15 @@
+<!DOCTYPE kpartgui>
+<kpartgui version="1" name="kopete_qq_group">
+	<MenuBar>
+            <Menu noMerge="1" name="file">
+                <Action name="QQBuzz" />
+                <Action name="QQimage" />
+                <Action name="QQShowInfo" />
+            </Menu>
+	</MenuBar>
+	<ToolBar name="statusToolBar">	
+            <Action name="QQBuzz" />
+            <Action name="QQimage" />
+            <Action name="QQShowInfo" />
+	</ToolBar>
+</kpartgui>
