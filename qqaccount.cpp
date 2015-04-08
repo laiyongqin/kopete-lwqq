@@ -585,6 +585,7 @@ void QQAccount::slotGetUserInfo(QString id, ConType type)
             ev = lwqq_info_get_friend_qqnumber(m_lc,buddy);
             lwqq_async_evset_add_event(set, ev);
             lwqq_async_add_evset_listener(set, _C_(3p,cb_display_user_info,ac,buddy, s_strdup(id.toUtf8().constData())));
+            lwqq_async_evset_free(set);
         }
     }
 }
@@ -889,6 +890,7 @@ void QQAccount::blist_change(LwqqClient *lc, LwqqMsgBlistChange *blist)
             ev = lwqq_info_get_friend_detail_info(lc, buddy);
             lwqq_async_evset_add_event(set, ev);
             lwqq_async_add_evset_listener(set,_C_(2p,write_buddy_to_db,lc,buddy));
+            lwqq_async_evset_free(set);
         }else{
             friend_come(lc, buddy);
         }
@@ -1128,6 +1130,7 @@ void QQAccount::ac_group_members(LwqqClient *lc, LwqqGroup *group)
                     ev = lwqq_info_get_friend_detail_info(m_lc, buddy);/*get detail of friend*/
                     lwqq_async_evset_add_event(set,ev);
                     lwqq_async_add_evset_listener(set,_C_(2p,cb_friend_avatar, m_lc, buddy));
+                    lwqq_async_evset_free(set);
                     addContact( QString(buddy->qqnumber), contactName,  targetGroup, Kopete::Account::ChangeKABC);
                     QQContact * addedContact = dynamic_cast<QQContact *>(contacts().value( QString(buddy->qqnumber) ));
                     addedContact->setContactType(Contact_Chat);
@@ -1151,6 +1154,7 @@ void QQAccount::ac_group_members(LwqqClient *lc, LwqqGroup *group)
                     ev = lwqq_info_get_friend_detail_info(m_lc, buddy);/*get detail of friend*/
                     lwqq_async_evset_add_event(set,ev);
                     lwqq_async_add_evset_listener(set,_C_(2p,cb_friend_avatar, m_lc, buddy));
+                    lwqq_async_evset_free(set);
                     addContact( QString(member->uin), contactName,  targetGroup, Kopete::Account::ChangeKABC);
                     QQContact * addedContact = dynamic_cast<QQContact *>(contacts().value( QString(buddy->uin) ));
                     addedContact->setContactType(Contact_Session);
@@ -1276,7 +1280,7 @@ void QQAccount::ac_login_stage_2(LwqqAsyncEvent* event,LwqqClient* lc)
     ev = lwqq_info_get_friend_detail_info(lc,lc->myself);
     lwqq_async_evset_add_event(set,ev);
     lwqq_async_add_evset_listener(set,_C_(p,cb_login_stage_3,lc));
-
+    lwqq_async_evset_free(set);
 }
 
 void QQAccount::friend_come(LwqqClient* lc,LwqqBuddy* buddy)
@@ -1565,6 +1569,7 @@ void QQAccount::ac_login_stage_3(LwqqClient* lc)
 
 
     lwqq_async_add_evset_listener(set, _C_(p,cb_login_stage_f,lc));
+    lwqq_async_evset_free(set);
 
     ac->state = LOAD_COMPLETED;
 
@@ -1940,6 +1945,7 @@ void QQAccount::ac_show_messageBox(msg_type type, const char *title, const char 
         ev = lwqq_info_get_friend_detail_info(m_lc, buddy);/*get detail of friend*/
         lwqq_async_evset_add_event(set,ev);
         lwqq_async_add_evset_listener(set,_C_(2p,cb_friend_avatar, m_lc, buddy));
+        lwqq_async_evset_free(set);
         kDebug(WEBQQ_GEN_DEBUG)<<"lwqq_async_add_evset_listener";
         addContact(QString::fromUtf8(m_addInfo->qq), QString::fromUtf8(m_addInfo->name), targetGroup, Kopete::Account::ChangeKABC);
         kDebug(WEBQQ_GEN_DEBUG)<<"addContact";
