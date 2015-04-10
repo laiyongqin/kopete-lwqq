@@ -132,7 +132,7 @@ target_link_libraries(kopete_webqq ${KDE4_KIO_LIBS} kopete  lwqq)
 #Urgly!!!
 set(PLUGIN_INSTALL_DIR "/usr/lib/kde4/")
 set(SERVICES_INSTALL_DIR "/usr/share/kde4/services/")
- 
+set(DATA_INSTALL_DIR "/usr/share/kde4/apps/")
 install(TARGETS kopete_webqq  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
